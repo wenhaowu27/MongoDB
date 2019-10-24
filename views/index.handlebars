@@ -1,0 +1,35 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark text-white">
+    <span class="navbar-brand mb-1 h1">All the News That's Fit to Scrape - handlebars</span>
+</nav>
+<div id="wrapper">
+    <h1 class="text-center">All the News That's Fit to Scrape</h1>
+    <h2><i></i></h2>
+    <div class="container">
+        {{!-- <div id="questions"></div> --}}
+
+                    <div class="text-center">
+              <a href="./scrape"><button class="btn btn-lg btn-primary"><span class="fa fa-credit-card"></span>Scrape</button></a>
+              <a href="./articles"><button class="btn btn-lg btn-primary"><span class="fa fa-credit-card"></span>Article</button></a>
+            </div>
+
+        <ul>
+            {{#each articles}}
+            <li>
+             <a href={{this.link}}>{{this.title}}></a>   
+                {{!-- <p><span class="label">Title:</span> {{this.title}}</p>
+                <p><span class="label">Link:</span> {{this.link}}</p> --}}
+            </li>
+            {{/each}}
+        </ul>
+
+       
+    </div>
+
+    <br>
+    <br>
+
+    <nav class="navbar navbar-light bg-light">
+        <span class="navbar-brand mb-0 h1"></span>
+    </nav>
+
+</div>
