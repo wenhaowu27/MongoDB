@@ -16,7 +16,7 @@ var cheerio = require("cheerio");
 // Require all models
 var db = require("./models");
 
-var PORT = 3000;
+var PORT =  process.env.PORT || 3000;
 
 // Initialize Express
 var app = express();
@@ -69,36 +69,24 @@ app.get("/scrape", function(req, res) {
     // Now, we grab every h2 within an article tag, and do the following:
     $("article h3").each(function(i, element) {
       // Save an empty result object
-      var result = {};
+        var result = {};
 
-      // Add the text and href of every link, and save them as properties of the result object
-      result.title = $(this)
-        .children("a")
-        .text();
-      result.link = $(this)
-        .children("a")
-        .attr("href");
-        result.body = $(this)
-        .children("div").children("p")
-        .text();
-      if(result.title){
-        articles.push(result)
-      }
-
-      db.Article.create(result)
-        .then(function(dbArticle) {
-          // View the added result in the console
-          console.log(dbArticle);
-        })
-        .catch(function(err) {
-          // If an error occurred, log it
-          console.log(err);
-        });
+        // Add the text and href of every link, and save them as properties of the result object
+        result.title = $(this)
+          .children("a")
+          .text();
+        result.link = $(this)
+          .children("a")
+          .attr("href");
+          result.body = $(this)
+          .children("div").children("p")
+          .text();
+        if(result.title){
+          articles.push(result)
+        }
     });
-
-    // Send a message to the client
-    // res.render("index", { articles: articles });
         res.json(articles);
+       
   });
 });
 

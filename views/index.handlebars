@@ -7,17 +7,19 @@
     <div class="container">
         {{!-- <div id="questions"></div> --}}
 
-                    <div class="text-center">
-              <a href="./scrape"><button class="btn btn-lg btn-primary"><span class="fa fa-credit-card"></span>Scrape</button></a>
-              <a href="./articles"><button class="btn btn-lg btn-primary"><span class="fa fa-credit-card"></span>Article</button></a>
+                    <div class="text-center">                       
+                        <button class="btn btn-lg btn-primary" id="scrape">SCRAPES</button>
+              {{!-- <a href="./scrape"><button class="btn btn-lg btn-primary"><span class="fa fa-credit-card"></span>Scrape</button></a> --}}
+              {{!-- <a href="./articles"><button class="btn btn-lg btn-primary"><span class="fa fa-credit-card"></span>Article</button></a> --}}
             </div>
 
         <ul>
             {{#each articles}}
             <li>
              <a href={{this.link}}>{{this.title}}></a>   
-                {{!-- <p><span class="label">Title:</span> {{this.title}}</p>
-                <p><span class="label">Link:</span> {{this.link}}</p> --}}
+                <p><span class="label">Title:</span> {{this.title}}</p>
+                <p><span class="label">Link:</span> {{this.link}}</p>
+                <button class="btn btn-lg btn-primary"  data-link={{this.link}} data-title="{{this.title}}" data-body="{{this.body}}" id="save">Save</button>
             </li>
             {{/each}}
         </ul>

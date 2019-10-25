@@ -1,34 +1,13 @@
-function getArticles() {
-  // Empty any results currently on the page
-  $("#articles").empty();
-  // Grab all of the current notes
-  $.getJSON("/articles", function(data) {
-    // For each note...
-    for (var i = 0; i < data.length; i++) {
-      // ...populate #results with a p-tag that includes the note's title and object id
-      $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "</p>");
-    }
-  });
-}
-getArticles()
 
-$(document).on("click", ".scrape-new", function() {
+$("#scrape").on("click", function() {
     $.ajax({
         method: "GET",
         url: "/scrape"
     }).then(function(res) {
-        location.reload();
+             location.reload();            
     })
 })
 
-$(document).on("click", ".clear", function() {
-    $.ajax({
-        method: "GET",
-        url: "/clear"
-    }).then(function(res) {
-        location.reload();
-    })
-})
 
 
 $(document).on("click", "#save", function() {
