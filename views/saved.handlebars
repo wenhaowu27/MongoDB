@@ -2,23 +2,22 @@
     <span class="navbar-brand mb-1 h1">All the News That's Fit to Scrape - handlebars</span>
 </nav>
 <div id="wrapper">
-    <h1 class="text-center">All the News That's Fit to Scrape</h1>
+    <h1 class="text-center">All the News That's Fit to Scrape - Saved Article</h1>
     <h2><i></i></h2>
     <div class="container">
         {{!-- <div id="questions"></div> --}}
 
                     <div class="text-center">                       
-                        <a class="btn btn-lg btn-primary scrape">SCRAPES</a>
-                        <a class="btn btn-lg btn-primary clear">clear</a>
-              {{!-- <a href="./scrape"><button class="btn btn-lg btn-primary"><span class="fa fa-credit-card"></span>Scrape</button></a> --}}
-              <a href="/saved"><button class="btn btn-lg btn-primary"><span class="fa fa-credit-card"></span>Article</button></a>
+                        {{!-- <a class="btn btn-lg btn-primary saved">SCRAPES</a> --}}
+                        <a href="/"><h2 class="btn btn-lg btn-primary">Back to Scrape</h2></a>
+                        
             </div><br><br>
 
         <ul>
             {{#each articles}}
             <div class="card" style="background-color:  #EFC050;">
             <li>
-                <button class="btn btn-lg btn-primary" style="float: right;" data-link={{this.link}} data-title="{{this.title}}" data-body="{{this.body}}" id="save">Save</button>
+              <a style="float:right" class="btn btn-primary delete" data-id={{this._id}}>Delete Article</a>
                 <a href={{this.link}}>{{this.title}}></a>   
                 <p><span class="label">Title:</span> {{this.title}}</p>
                 <p><span class="label">Link:</span> {{this.link}}</p>

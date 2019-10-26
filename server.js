@@ -10,11 +10,6 @@ var db = require("./models");
 // Our scraping tools
 // Axios is a promised-based http library, similar to jQuery's Ajax method
 // It works on the client and on the server
-var axios = require("axios");
-var cheerio = require("cheerio");
-
-// Require all models
-var db = require("./models");
 
 var PORT =  process.env.PORT || 3000;
 
@@ -51,11 +46,14 @@ var articles = [];
 app.get("/", function(req, res) {
     res.render("index", { articles: articles });
 });
-
-app.get("/", function(req, res) {
-    articles = [];
-    res.json(articles);
+app.get("/articles", function(req, res) {
+    res.render("saved", { articles: articles });
 });
+
+// app.get("/", function(req, res) {
+//     articles = [];
+//     res.json(articles);
+// });
 
 
 // A GET route for scraping the echoJS website
@@ -85,20 +83,34 @@ app.get("/scrape", function(req, res) {
           articles.push(result)
         }
     });
-        res.json(articles);
+        res.json(articles);        
+    // res.render("index", { articles: articles });
        
   });
 });
 
 // Route for getting all Articles from the db
-app.get("/articles", function(req, res) {
-  // TODO: Finish the route so it grabs all of the articles
-  db.Article.find({}).then(function(data){
-    res.json(data)
-  }).catch(function(err){
-    res.json(err);
-  })
+app.get("/saved", function(req, res) {
+  db.Article.find({})
+      .then(function(dbarticle) {
+          // If all Notes are successfully found, send them back to the client
+          // res.json(dbarticle);            
+          res.render("saved", { articles: dbarticle });
+      })
+      .catch(function(err) {
+          // If an error occurs, send the error back to the client
+          res.json(err);
+      });
 });
+
+
+
+
+app.get("/clear", function(req, res) {
+  articles = [];
+  res.json(articles);
+});
+
 
 // Route for grabbing a specific Article by id, populate it with it's note
 app.get("/articles/:id", function(req, res) {
@@ -125,8 +137,8 @@ app.post("/articles", function(req, res) {
       res.render("index", { articles: articles });
 });
 
-app.get("/saved", function(req, res) {
-  db.Article.find({})
+app.get("/articles", function(req, res) {
+  db.Article.create(req.body)
       .then(function(dbarticle) {
           // If all Notes are successfully found, send them back to the client
           // res.json(dbarticle);            
@@ -162,8 +174,7 @@ app.put("/articles", function(req, res) {
   })
 });
 
-// Delete One article from the DB
-app.get("/articles/:id", function(req, res) {
+app.get("/saved/:id", function(req, res) {
   // Remove a note using the objectID
   db.Article.remove(
     {
@@ -176,7 +187,8 @@ app.get("/articles/:id", function(req, res) {
         res.send(error);
       }
       else {
-
+        // Otherwise, send the mongojs response to the browser
+        // This will fire off the success function of the ajax request
         console.log(removed);
         res.send(removed);
       }
