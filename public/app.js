@@ -1,7 +1,7 @@
 
 $(document).on("click", ".scrape", function() {
      $.ajax({
-        method: "POST",
+        method: "GET",
         url: "/scrape"
     }).then(function(res) {
              location.reload();            
@@ -22,7 +22,7 @@ $(document).on("click", ".clear", function() {
 
 $(document).on("click", "#save", function() {
   $.ajax({
-      method: "GET",
+      method: "POST",
       url: "/articles",
       data: {
           title: $(this).attr("data-title"),
@@ -106,10 +106,10 @@ $(document).on("click", "#savenote", function() {
 $(document).on("click", ".delete", function(){
   console.log(this)
 
-  var id = ($(this).attr("data-id"));
+  var thisId = ($(this).attr("data-id"));
   $.ajax({
     method: "GET",
-    url: "/saved/" + id
+    url: "/saved/" + thisId
     
   }).then(function(data) {
     // Log the response
@@ -117,7 +117,7 @@ $(document).on("click", ".delete", function(){
     // console.log(data);
 
    // remove the article (from the saved page)
-    $("#" + id).remove();
+    $("#" + thisId).remove();
     location.reload();
   });
 });

@@ -59,7 +59,7 @@ app.get("/articles", function(req, res) {
 // A GET route for scraping the echoJS website
 app.get("/scrape", function(req, res) {
   // First, we grab the body of the html with axios
-  axios.get("https://phys.org/physics-news/").then(function(response) {
+  axios.get("https://phys.org/technology-news/").then(function(response) {
     // Then, we load that into cheerio and save it to $ for a shorthand selector
     var $ = cheerio.load(response.data);
     articles = [];
@@ -258,6 +258,19 @@ app.post("/articles/:id", function(req, res) {
 //     res.json(err);
 //   })
 // });
+
+app.get("/saved", function(req, res) {
+  db.Article.find({})
+      .then(function(dbarticle) {
+          // If all Notes are successfully found, send them back to the client
+          // res.json(dbarticle);            
+          res.render("saved", { articles: dbarticle });
+      })
+      .catch(function(err) {
+          // If an error occurs, send the error back to the client
+          res.json(err);
+      });
+});
 
 app.get("/saved/:id", function(req, res) {
   // Remove a note using the objectID
