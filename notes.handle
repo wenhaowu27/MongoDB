@@ -9,13 +9,12 @@
 
                     <div class="text-center">                       
                         {{!-- <a class="btn btn-lg btn-primary saved">SCRAPES</a> --}}
-                        <a href="/"><h2 class="btn btn-lg btn-primary">Back to Scrape</h2></a>                        
-                        {{!-- <a href="/notes"><h2 class="btn btn-lg btn-primary">Notes</h2></a> --}}
+                        <a href="/"><h2 class="btn btn-lg btn-primary">Back to Scrape</h2></a>
                         
             </div><br><br>
 
         <ul>
-            {{#each articles}}
+            {{#each note}}
             <div class="card" style="background-color:  #EFC050;">
             <li>
               {{!-- <form action="form-inline"> --}}
@@ -23,20 +22,11 @@
               {{!-- </form> --}}
               <a style="float:right" class="btn btn-primary delete" data-id={{this._id}}>Delete Article</a>
               {{!-- <a style="float:right" class="btn btn-primary" id="notes" data-id={{this._id}}>Add Note</a> --}}
-                <a href={{this.link}}>{{this.title}}></a>   
-                <p><span class="label">Title:</span> {{this.title}}</p>
-                <p><span class="label">Link:</span> {{this.link}}</p>     
-                <a style="float:right" id="notes" class="btn btn-success" data-id="{{this._id}}">Add Note</a>
+                <a href={{this._id}}>{{this.body}}></a>   
+                <p><span class="label">ID:</span> {{this._id}}</p>
+                <p><span class="label">Note:</span> {{this.body}}</p>     
+                <a style="float:right" class="btn btn-success notes" data-id="{{this._id}}">Get Note</a>
             </li>
-            <br>
-                <li>
-                <a style="float:right" class="btn btn-success notes">Get Notes</a>
-                {{#each notes}}
-                <p><span class="label">Note:</span></p>
-                <a href={{this.notes}}>{{this._id}}</a>  
-                {{/each}}       
-                </li>
-            </div>
             <br>
             {{/each}}
         </ul>

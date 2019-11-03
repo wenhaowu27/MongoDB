@@ -18,6 +18,14 @@ $(document).on("click", ".clear", function() {
   })
 })
 
+$(document).on("click", ".notes", function() {
+  $.ajax({
+     method: "GET",
+     url: "/notes"
+ }).then(function(res) {
+          location.reload();            
+ })
+})
 
 
 $(document).on("click", "#save", function() {

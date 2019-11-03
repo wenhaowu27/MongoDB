@@ -49,11 +49,10 @@ app.get("/", function(req, res) {
 app.get("/articles", function(req, res) {
     res.render("saved", { articles: articles });
 });
-
-// app.get("/", function(req, res) {
-//     articles = [];
-//     res.json(articles);
+// app.get("/notes", function(req, res) {
+//     res.render("notes", { notes: notes });
 // });
+
 
 
 // A GET route for scraping the echoJS website
@@ -132,6 +131,7 @@ app.get("/notes", function(req, res) {
     .then(function(dbNote) {
       // If all Notes are successfully found, send them back to the client
       res.json(dbNote);
+      res.render("notes", { articles: articles });
     })
     .catch(function(err) {
       // If an error occurs, send the error back to the client
