@@ -87,11 +87,12 @@ $(document).on("click", "#savenote", function() {
       // Value taken from note textarea
       body: $("#bodyinput").val()
     }
-  })
+  }).then
     // With that done
     .then(function(data) {
       // Log the response
       console.log("THIS IS AJAX POST",data);
+      location.reload();
       // Empty the notes section
       // $("#notes").empty();
     });
